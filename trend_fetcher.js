@@ -1,6 +1,7 @@
 const https = require("https");
 
 const FINANCE_KEYWORDS = [
+  // Finance/Economy
   "money","income","salary","job","earn","pay","benefit","tax","loan","invest",
   "credit","insurance","scheme","welfare","pension","rent","price","cost",
   "subsidy","grant","debt","saving","budget","inflation","recession","layoff",
@@ -9,7 +10,21 @@ const FINANCE_KEYWORDS = [
   "pm kisan","aadhaar","gst","epf","rupee","lakh","crore","emi","startup",
   "sensex","nifty","rbi","sebi","snap","medicaid","medicare","social security",
   "401k","irs","minimum wage","student loan","housing","stimulus","tariff",
-  "trade","wage","poverty","wealth","rich","financial","fund","retire","spend"
+  "trade","wage","poverty","wealth","rich","financial","fund","retire","spend",
+  // Entertainment/Celebrity
+  "celebrity","actor","actress","singer","rapper","net worth","bollywood",
+  "hollywood","ott","netflix","youtube","influencer","tiktoker","reality tv",
+  "divorce","breakup","scandal","controversy","award","box office","hit flop",
+  // Sports
+  "cricket","ipl","nba","nfl","fifa","athlete","player","team","match","league",
+  "tournament","champion","transfer","contract","coach","win","loss","score",
+  // Products/Shopping
+  "best","review","vs","compare","worth","buy","cheap","budget","under",
+  "smartphone","laptop","phone","tablet","appliance","gadget","product",
+  "mixer","air fryer","refrigerator","washing machine","earbuds","camera",
+  // Lifestyle
+  "home","kitchen","living","decor","food","recipe","travel","trip","health",
+  "fitness","diet","weight","beauty","fashion","relationship","marriage","career"
 ];
 
 function fetch(url) {
@@ -91,6 +106,38 @@ async function fetchGoogleTrends(geo = "US") {
   }
 }
 
+// YouTube 트렌딩 제목 스크래핑
+async function fetchYouTubeTrending(geo = "US") {
+  try {
+    const gl = geo;
+    const hl = geo === "IN" ? "en-IN" : "en-US";
+    const html = await fetch(
+      `https://www.youtube.com/feed/trending?gl=${gl}&hl=${hl}`
+    );
+    const matches = [...html.matchAll(/"title":\{"runs":\[\{"text":"([^"]{10,100})"\}\]/g)];
+    const titles = [...new Set(matches.map(m => m[1]))].slice(0, 12);
+    return titles.map(title => ({ source: `youtube_${geo}`, title, geo, score: 80 }));
+  } catch (e) { return []; }
+}
+
+// Google Trends 카테고리별
+async function fetchGoogleTrendsByCategory(geo = "US", cat = "3") {
+  try {
+    const xml = await fetch(
+      `https://trends.google.com/trends/trendingsearches/daily/rss?geo=${geo}&cat=${cat}`
+    );
+    const titles = [...xml.matchAll(/<title><!\[CDATA\[(.*?)\]\]><\/title>/g)].map(m => m[1]);
+    const traffic = [...xml.matchAll(/<ht:approx_traffic>(.*?)<\/ht:approx_traffic>/g)].map(m => m[1]);
+    return titles
+      .filter(t => t && t.length > 3 && !t.includes("Daily Search Trends"))
+      .map((title, i) => ({
+        source: `trends_${geo}_ent`,
+        title, geo,
+        score: parseInt(traffic[i]?.replace(/[^0-9]/g, "") || "0") / 1000
+      }));
+  } catch (e) { return []; }
+}
+
 // Hacker News - 기술/비즈니스 트렌드
 async function fetchHackerNews() {
   try {
@@ -116,29 +163,62 @@ async function getTrendingTopics() {
 
   const queries = {
     US: [
-      "side hustle income 2026", "government benefits cut 2026", "recession money tips",
-      "celebrity net worth 2026", "athlete salary contract 2026",
-      "influencer income money 2026", "travel cheap deals 2026",
-      "food business earn money", "social security 2026"
+      // Finance
+      "side hustle income 2026", "government benefits cut", "recession money",
+      // Entertainment
+      "celebrity net worth shocking 2026", "celebrity divorce settlement",
+      "influencer fired dropped sponsor", "reality TV cast salary",
+      "musician broke bankrupt 2026",
+      // Sports
+      "athlete contract record 2026", "NBA NFL trade drama salary",
+      "sports betting win lose money",
+      // Viral/lifestyle
+      "viral tiktok product make money", "trending side hustle tiktok 2026",
+      "get rich quick exposed", "passive income lie truth",
+      // Food/Travel
+      "food truck income how much", "restaurant fail close 2026",
+      "cheap flight deal hack 2026",
+      // Home/Living
+      "best kitchen appliance 2026", "home gadget worth buying",
+      "air fryer vs oven save money", "smart home budget setup"
     ],
     IN: [
-      "india government scheme 2026", "PM Modi income scheme", "India tax saving 2026",
-      "Bollywood actor salary 2026", "IPL player auction money",
-      "india street food business income", "india influencer earnings",
-      "india travel cheap trip", "cricket player salary 2026"
+      // Finance/Gov
+      "india government scheme 2026", "PM Modi yojana benefit",
+      "India GST income tax news",
+      // Entertainment
+      "Bollywood actor salary 2026", "Shah Rukh Khan Deepika net worth",
+      "OTT web series cast salary", "YouTube India top earner 2026",
+      "India influencer controversy money",
+      // Sports
+      "IPL salary auction 2026", "Virat Kohli Rohit salary endorsement",
+      "kabaddi football India player income",
+      // Viral/Food
+      "viral food business India 2026", "chai stall profit income India",
+      "street food viral instagram india",
+      // Home/Living India
+      "best mixer grinder India 2026", "air fryer India worth buying",
+      "best smartphone under 15000 India", "best laptop student India 2026",
+      "best AC India summer 2026", "washing machine buy guide India",
+      "IAS officer salary India 2026", "government teacher salary India",
+      "software engineer salary India fresher"
     ]
   };
 
-  const [tUS, tIN, hn, ...newsResults] = await Promise.all([
+  const [tUS, tIN, tUSEnt, tINEnt, ytUS, ytIN, hn, ...newsResults] = await Promise.all([
     fetchGoogleTrends("US"),
     fetchGoogleTrends("IN"),
+    fetchGoogleTrendsByCategory("US", "3"),  // Entertainment
+    fetchGoogleTrendsByCategory("IN", "3"),  // Entertainment India
+    fetchYouTubeTrending("US"),
+    fetchYouTubeTrending("IN"),
     fetchHackerNews(),
     ...queries.US.map(q => fetchGoogleNews(q, "US")),
     ...queries.IN.map(q => fetchGoogleNews(q, "IN")),
   ]);
 
   const newsFlat = newsResults.flat();
-  const all = [...tUS, ...tIN, ...hn, ...newsFlat];
+  const all = [...tUS, ...tIN, ...tUSEnt, ...tINEnt, ...ytUS, ...ytIN, ...hn, ...newsFlat];
 
   // 중복 제거
   const seen = new Set();

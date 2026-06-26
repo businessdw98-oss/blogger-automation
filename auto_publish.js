@@ -14,6 +14,20 @@ const { getTrendingTopics, trendToTitle, buildTrendContent } = require("./trend_
 const { logPost, getUsedTopicIds, printSummary } = require("./tracker");
 const sb = require("./supabase");
 
+// 트렌드 키워드 → Blogger 카테고리 매핑
+function detectCategory(title) {
+  const t = title.toLowerCase();
+  if (/bollywood|celebrity|actor|actress|singer|rapper|idol|kpop|ott|netflix|film|movie|drama|reality tv|influencer|youtube|tiktok|instagram/i.test(t)) return "Entertainment";
+  if (/cricket|ipl|nba|nfl|fifa|football|soccer|tennis|golf|athlete|sports|f1|formula|kabaddi|wrestling/i.test(t)) return "Sports";
+  if (/food|restaurant|recipe|chef|street food|chai|cooking|diet|meal|eating/i.test(t)) return "Food";
+  if (/travel|flight|hotel|trip|vacation|destination|visa|airport|tourism/i.test(t)) return "Travel";
+  if (/ai|tech|software|app|startup|gadget|phone|crypto|bitcoin|nft/i.test(t)) return "Tech";
+  if (/kitchen|cooking|appliance|mixer|blender|air fryer|microwave|refrigerator|washing machine|vacuum|home|living|bedroom|bathroom|furniture|decor|gadget|product review|best buy/i.test(t)) return "Home & Living";
+  if (/aadhaar|pm kisan|yojana|epf|gst|ration|subsidy|scheme|welfare|snap|medicaid|social security|benefit/i.test(t)) return "Government Benefits";
+  if (/side hustle|freelance|passive income|earn|make money|income|salary|job|career|business/i.test(t)) return "Side Income";
+  return "Finance";
+}
+
 const args = process.argv.slice(2);
 
 if (args.includes("--status")) { printSummary(); process.exit(0); }
@@ -28,7 +42,8 @@ async function publishTrendPost(token, trend, templateIdx) {
   const title = trendToTitle(trend, templateIdx);
   const content = buildTrendContent(trend, img, null, null);
   const geo = trend.geo || "US";
-  const labels = [trend.title, "trending", "2026", geo === "IN" ? "India" : "finance", "money"];
+  const category = detectCategory(trend.title);
+  const labels = [category, "Trending", "2026", geo === "IN" ? "India" : "US", trend.source?.includes("youtube") ? "YouTube Trends" : "News"];
 
   const post = await publishPost({ title, content, labels, token });
   const entry1 = { topicId: `trend_${trend.title.slice(0, 20).replace(/\s/g, "_")}`, title: post.title, url: post.url, labels, target: geo };
@@ -44,10 +59,17 @@ async function publishTemplatePost(token, topic) {
   }
   const content = generateContent(topic.id, topic.niche);
 
+  const nicheToCategory = {
+    entertainment: "Entertainment", sports: "Sports", food: "Food",
+    travel: "Travel", benefits: "Government Benefits", income: "Side Income",
+    finance: "Finance", tech: "Tech", home: "Home & Living", living: "Home & Living",
+    kitchen: "Home & Living", appliance: "Home & Living"
+  };
+  const category = nicheToCategory[topic.niche] || "Finance";
   const post = await publishPost({
     title: topic.title,
     content: content.trim(),
-    labels: [...(topic.keywords || []), topic.niche, topic.target, "2026"],
+    labels: [category, topic.target === "IN" ? "India" : topic.target, "2026", ...(topic.keywords?.slice(0, 2) || [])],
     token
   });
   const entry2 = { topicId: topic.id, title: post.title, url: post.url, labels: topic.keywords, target: topic.target };

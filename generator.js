@@ -289,6 +289,326 @@ ${hr()}
 ${cta("finance")}
 `,
 
+  // ===== 인도 급여 시리즈 =====
+  india_salary_ias: () => `
+${img("benefits", "IAS officer salary India 2026")}
+<p>Cracking the UPSC exam is one thing. But what does an IAS officer actually take home every month? <strong>The salary is just the beginning — the real package includes perks most people don't talk about.</strong> Here's the complete 2026 breakdown.</p>
+${hr()}
+<h2>IAS Salary Structure (7th Pay Commission)</h2>
+<p>IAS officers are paid on the pay matrix under the Central Government:</p>
+<ul>
+<li><strong>Junior Scale (Entry Level):</strong> Basic pay ₹56,100 + DA + HRA = <u>₹75,000–₹90,000 in-hand</u></li>
+<li><strong>Senior Time Scale (5–8 years):</strong> ₹67,700 basic → ₹95,000–₹1,10,000 in-hand</li>
+<li><strong>Super Time Scale (SDM/DM level):</strong> ₹1,00,000 basic → ₹1,30,000–₹1,50,000 in-hand</li>
+<li><strong>Apex Scale (Secretary level):</strong> Fixed at ₹2,25,000</li>
+<li><u>Cabinet Secretary (highest):</u> ₹2,50,000 fixed</li>
+</ul>
+${hr()}
+<h2>The Perks Nobody Tells You About</h2>
+${img("family", "IAS officer government bungalow perks")}
+<p>The real value of an IAS posting isn't the salary — it's the <strong>perks that add ₹5–₹15 lakh/year in value:</strong></p>
+<ul>
+<li><u>Government accommodation</u> — bungalows in prime areas (market rent: ₹30,000–₹2,00,000/month)</li>
+<li><strong>Official vehicle</strong> — car with driver, fuel paid</li>
+<li>Domestic help allowance</li>
+<li><u>LTC (Leave Travel Concession)</u> — free travel for family 4 times in a block</li>
+<li>Medical benefits — fully covered for self and family</li>
+<li>Pension + Gratuity (NPS for post-2004 recruits)</li>
+</ul>
+${hr()}
+<h2>IAS vs Private Sector: The Real Comparison</h2>
+<p>A 2026 IAS officer at DM level earns roughly ₹1.5–₹2 lakh/month in-hand. An equivalent-level corporate manager earns ₹2–₹4 lakh — <strong>but pays full market rent, transport, and medical costs.</strong> When you net out perks, the gap shrinks significantly.</p>
+${hr()}
+<h2>State vs Central Posting: Does It Matter?</h2>
+<p>Yes. <u>Central deputation postings often come with higher allowances</u>. Postings in metros like Delhi come with better accommodation and allowances than rural district postings — though many officers prefer field postings for authority and impact.</p>
+${cta("benefits")}
+`,
+
+  india_salary_software: () => `
+${img("laptop", "software engineer salary India 2026")}
+<p>The IT salary landscape in India has shifted significantly in 2026 — some companies are paying more, others have frozen increments. <strong>Here's what freshers and experienced engineers are actually earning, company by company.</strong></p>
+${hr()}
+<h2>Fresher Salaries (0–2 Years)</h2>
+<ul>
+<li><strong>Service Companies (TCS, Infosys, Wipro, HCL):</strong> ₹3.5–₹6.5 LPA base</li>
+<li><strong>Mid-tier IT (LTIMindtree, Mphasis, Hexaware):</strong> ₹5–₹9 LPA</li>
+<li><strong>Product Companies (Zoho, Freshworks, PhonePe):</strong> ₹8–₹18 LPA</li>
+<li><u>FAANG India offices (Google, Microsoft, Amazon):</u> ₹25–₹45 LPA (campus hire)</li>
+<li><strong>Startups:</strong> ₹4–₹25 LPA (huge range — equity matters here)</li>
+</ul>
+${hr()}
+<h2>Mid-Level (3–7 Years Experience)</h2>
+${img("income", "software developer salary India mid level")}
+<ul>
+<li><strong>Service companies:</strong> ₹8–₹18 LPA (increments average 8–12%)</li>
+<li><strong>Product/startup:</strong> ₹18–₹40 LPA</li>
+<li><u>FAANG:</u> ₹40–₹80 LPA total comp (base + bonus + RSUs)</li>
+</ul>
+<p>The biggest salary jumps come from <strong>job-hopping</strong> — switching companies typically gets 30–50% hikes vs 10–15% from appraisals.</p>
+${hr()}
+<h2>City-Wise Premium (Same Role)</h2>
+<ul>
+<li><strong>Bengaluru:</strong> Highest — 15–25% premium over national average</li>
+<li>Hyderabad: 10–20% premium</li>
+<li>Pune, Chennai: Near national average</li>
+<li><u>Tier-2 cities:</u> 20–30% lower, but lower cost of living offsets it</li>
+</ul>
+${hr()}
+<h2>How to Get the Best Increment in 2026</h2>
+<ol>
+<li><u>Get a competing offer</u> — counter-offer negotiations work 60% of the time</li>
+<li><strong>Upskill in GenAI, cloud (AWS/Azure), or data engineering</strong> — these command 20–40% premiums</li>
+<li>Move from service to product — the single biggest salary jump available</li>
+<li><u>Consider US/UK remote roles</u> — ₹50–₹1.5 LPA range exists for Indian-based remote work</li>
+</ol>
+${cta("income")}
+`,
+
+  india_salary_airhostess: () => `
+${img("travel", "air hostess salary India 2026 IndiGo Air India")}
+<p>It looks glamorous. But what does a cabin crew member in India actually earn? <strong>The salary varies wildly between airlines — and there are hidden perks that change the whole picture.</strong></p>
+${hr()}
+<h2>Airline-Wise Salary Comparison (2026)</h2>
+<ul>
+<li><strong>IndiGo:</strong> ₹25,000–₹35,000 base (fresher) + flying allowance → <u>₹40,000–₹65,000/month total</u></li>
+<li><strong>Air India:</strong> ₹35,000–₹55,000 base (government scale) → ₹60,000–₹90,000 total</li>
+<li><strong>Vistara / Air India Express:</strong> ₹30,000–₹50,000 base → ₹50,000–₹80,000 total</li>
+<li><strong>SpiceJet:</strong> ₹22,000–₹38,000 base → ₹35,000–₹60,000 total</li>
+<li><u>International airlines (Emirates, Qatar, Etihad):</u> AED 4,000–₹8,000/month + accommodation = ₹1,00,000–₹2,00,000 equivalent</li>
+</ul>
+${hr()}
+<h2>The Hidden Perks</h2>
+${img("family", "cabin crew perks benefits India")}
+<ul>
+<li><u>Free or heavily discounted flights</u> — for self and immediate family (huge value)</li>
+<li>Hotel stay on layovers — paid by airline</li>
+<li><strong>Per diem allowance</strong> on international routes: $40–$100/day</li>
+<li>Uniform, grooming provided</li>
+<li>Quick career growth — Senior Cabin Crew → Purser → Head Purser</li>
+</ul>
+${hr()}
+<h2>How to Become a Cabin Crew in India</h2>
+<ol>
+<li>Age: 18–27 (most airlines) | Height: 155–172cm range</li>
+<li>Education: 10+2 minimum; degree preferred</li>
+<li>Training: Airlines provide 6–8 week training (paid or bonded)</li>
+<li><u>Key skills tested:</u> Communication, grooming, emergency procedures, service attitude</li>
+<li>Apply directly on airline career portals — walk-in drives happen 4–6 times a year</li>
+</ol>
+${cta("income")}
+`,
+
+  india_salary_teacher: () => `
+${img("benefits", "government teacher salary India 2026")}
+<p>Teaching in a government school used to mean low pay and less respect. <strong>In 2026, the salary picture has changed significantly — especially after the 7th Pay Commission revisions.</strong> Here's what teachers actually earn across levels and states.</p>
+${hr()}
+<h2>Central Government Teacher Salaries</h2>
+<ul>
+<li><strong>Primary Teacher (TGT equivalent, KV/NVS):</strong> ₹44,900–₹1,42,400 pay level → <u>₹50,000–₹65,000 in-hand</u></li>
+<li><strong>Trained Graduate Teacher (TGT):</strong> ₹44,900 basic → ₹60,000–₹75,000 in-hand with DA/HRA</li>
+<li><strong>Post Graduate Teacher (PGT):</strong> ₹47,600 basic → ₹65,000–₹85,000 in-hand</li>
+<li><u>Principal (KV/NVS):</u> ₹78,800 basic → ₹1,05,000–₹1,25,000 in-hand</li>
+</ul>
+${hr()}
+<h2>State-Wise Variation</h2>
+${img("india", "state teacher salary comparison India")}
+<p>State government teacher salaries vary significantly:</p>
+<ul>
+<li><strong>Highest paying states:</strong> Kerala, Haryana, Maharashtra, Delhi (₹50,000–₹80,000/month)</li>
+<li><strong>Mid range:</strong> Karnataka, Tamil Nadu, Gujarat (₹35,000–₹55,000)</li>
+<li><u>Lower-paying states:</u> UP, Bihar, Jharkhand (₹25,000–₹45,000 — though improving)</li>
+</ul>
+${hr()}
+<h2>University/College Professor Salaries</h2>
+<ul>
+<li><strong>Assistant Professor (government college):</strong> ₹57,700 basic → ₹80,000–₹1,00,000 in-hand</li>
+<li><strong>Associate Professor:</strong> ₹1,31,400 basic → ₹1,50,000–₹1,80,000</li>
+<li><u>Professor:</u> ₹1,44,200 basic → ₹1,70,000–₹2,00,000</li>
+</ul>
+<p>Private university salaries are <strong>30–50% lower</strong> with fewer perks — government positions remain significantly more lucrative for academics.</p>
+${hr()}
+<h2>Beyond the Salary: The Real Benefits</h2>
+<ul>
+<li>Job security — permanent government positions are nearly impossible to lose</li>
+<li><u>Pension</u> (Old Pension Scheme states) or NPS</li>
+<li>Summer/winter vacations — 60–80 days/year paid leave</li>
+<li><strong>DA increases</strong> twice yearly automatically</li>
+</ul>
+${cta("benefits")}
+`,
+
+  india_smartphone_under15k: () => `
+${img("laptop", "best smartphone under 15000 India 2026")}
+<p>₹15,000 is still the most competitive price segment in Indian smartphones. <strong>The options are overwhelming — so we've narrowed it down to the 6 phones actually worth buying in mid-2026.</strong></p>
+${hr()}
+<h2>Quick Picks Before the Deep Dive</h2>
+<ul>
+<li><strong>Best Overall:</strong> Redmi Note 14 5G — camera, battery, performance balanced</li>
+<li><strong>Best Camera:</strong> Realme 13 5G — 108MP main, solid portrait mode</li>
+<li><u>Best Battery:</u> Motorola G85 — 5000mAh + 33W fast charging</li>
+<li><strong>Best for Gaming:</strong> Poco M6 Pro — Helio G99 chip, 144Hz display</li>
+</ul>
+${hr()}
+<h2>What Actually Matters at This Price</h2>
+${img("income", "smartphone comparison India budget 2026")}
+<p>At ₹15,000, don't compromise on:</p>
+<ul>
+<li><u>5G connectivity</u> — if you're in a 5G city, future-proof yourself now</li>
+<li><strong>Processor generation</strong> — Helio G99 or Snapdragon 4 Gen 2 minimum</li>
+<li>Battery: 5000mAh minimum + 18W charging</li>
+<li><u>RAM: 6GB minimum</u> (8GB ideal for 2–3 year longevity)</li>
+</ul>
+<p>Things you can compromise on: camera megapixels (50MP vs 108MP matters less than software), screen refresh rate (90Hz is fine).</p>
+${hr()}
+<h2>Where to Buy for Best Price</h2>
+<ul>
+<li><strong>Amazon India & Flipkart:</strong> Festival sales (Big Billion Day, Great Indian Sale) drop prices ₹1,000–₹3,000</li>
+<li><u>Brand websites:</u> Exclusive colors, bundled accessories sometimes</li>
+<li><strong>Offline stores:</strong> Negotiate — you can often get a case + screen protector + small discount</li>
+</ul>
+${hr()}
+<h2>Should You Buy Now or Wait?</h2>
+<p>The Redmi Note 15 series and Realme 14 series are expected by October 2026. If you can wait 3–4 months, <u>the current Note 14 and Realme 13 will drop ₹2,000–₹3,000</u> making them even better value. If you need a phone now, the current picks are excellent.</p>
+${cta("home")}
+`,
+
+  kitchen_india_airfryer: () => `
+${img("food", "air fryer India 2026 worth buying")}
+<p>Air fryers are everywhere in India right now — but are they actually worth it, or just another kitchen gadget that collects dust? <strong>We cooked every common Indian dish in an air fryer for 30 days to find out.</strong></p>
+${hr()}
+<h2>What We Cooked and How It Went</h2>
+<ul>
+<li><strong>Samosa (frozen):</strong> ✅ Excellent — crispy outside, hot inside, 12 mins at 180°C. Oil saved: zero (already oil-free cooking)</li>
+<li><strong>Paneer tikka:</strong> ✅ Restaurant-level results — 15 mins, marinade caramelizes perfectly</li>
+<li><strong>French fries:</strong> ✅ Crispy with 1 tsp oil vs deep-frying in 500ml</li>
+<li><strong>Roti/Paratha:</strong> ❌ Not recommended — dries out, uneven heat</li>
+<li><u>Chicken wings:</u> ✅ Outstanding — skin gets crispy without a drop of extra oil</li>
+<li><strong>Whole fish:</strong> ✅ Works well, 20–22 mins, better than oven for small pieces</li>
+</ul>
+${hr()}
+<h2>Electricity Cost: The Real Math</h2>
+${img("money", "air fryer electricity bill India")}
+<p>A 1500W air fryer running 30 mins/day uses 0.75 units. At ₹8/unit (average India): <u>₹6/day = ₹180/month</u>. Compared to a gas stove for the same cooking: roughly ₹120–₹150. <strong>The difference is small — the time saved is the real benefit.</strong></p>
+${hr()}
+<h2>Best Air Fryers in India Under ₹3,000</h2>
+<ul>
+<li><strong>Philips Air Fryer HD9200 (₹7,999):</strong> Premium build, Rapid Air Technology, best for serious use</li>
+<li><strong>Agaro Regal (₹2,999):</strong> Best value — 12L, digital panel, handles family quantities</li>
+<li><u>Inalsa Air Fryer Fry-Light (₹1,799):</u> Best budget pick — 1.2L (single serving), compact</li>
+<li><strong>Lifelong Digi Air Fryer (₹2,299):</strong> 4L, good for 2–3 people, digital controls</li>
+</ul>
+${hr()}
+<h2>Verdict: Should You Buy One?</h2>
+<p>If you cook chicken, snacks, or frozen foods 3+ times a week — <strong>yes, worth it.</strong> The oil savings and time savings add up. If you primarily cook dal-roti-sabzi, a pressure cooker and tawa are still more important investments.</p>
+<p><u>Best starter pick for India:</u> Agaro Regal at ₹2,999 — handles samosas, tikkas, wings, and reheating without compromising on quantity.</p>
+${cta("home")}
+`,
+
+  kitchen_gadgets_worth: () => `
+${img("food", "kitchen gadgets worth buying 2026")}
+<p>Every year, new kitchen gadgets promise to change your cooking. <strong>Most don't. Some do.</strong> Here's an honest breakdown of what's actually worth buying in 2026 — and what to skip.</p>
+${hr()}
+<h2>Worth Every Penny ✅</h2>
+<ul>
+<li><strong>Instant Pot / Pressure Cooker:</strong> Cuts cooking time by 70%. One of the highest ROI kitchen purchases. Cost: $80–$120 / ₹3,000–₹6,000</li>
+<li><u>Good chef's knife (single, quality):</u> One sharp knife beats 10 cheap ones. Victorinox Fibrox at $40 lasts 15 years.</li>
+<li><strong>Digital kitchen scale:</strong> $12–₹500. Baking precision + portion control. Life-changing for both.</li>
+<li><u>Silicone spatula set:</u> Heatproof, non-stick safe, dishwasher safe. $8 set lasts years.</li>
+<li><strong>Immersion/stick blender:</strong> Soups, smoothies, sauces in the pot. No blender jar to wash. $25–₹1,200</li>
+</ul>
+${hr()}
+<h2>Skip These ❌</h2>
+${img("laptop", "useless kitchen gadgets")}
+<ul>
+<li><strong>Avocado slicer:</strong> A knife does this. Don't.</li>
+<li><u>Egg separator:</u> Your hands are faster. Free.</li>
+<li><strong>Spiralizer (unless you actually meal prep):</strong> Used twice then forgotten by 80% of buyers</li>
+<li><u>Quesadilla maker:</u> A pan works better and makes any size</li>
+<li><strong>Single-use appliances</strong> (donut maker, hot dog cooker) — no counter space is worth this</li>
+</ul>
+${hr()}
+<h2>The "It Depends" Category</h2>
+<ul>
+<li><strong>Air fryer:</strong> Worth it if you cook chicken/snacks often. Not worth it for a dal-roti household.</li>
+<li><u>Stand mixer:</u> Essential if you bake weekly. Overkill otherwise.</li>
+<li><strong>Instant coffee machine:</strong> Saves money vs café if you drink 2+ cups daily. Do the math for your habit.</li>
+</ul>
+${cta("kitchen")}
+`,
+
+  kitchen_save_grocery: () => `
+${img("food", "cut grocery bill in half 2026")}
+<p>The average family overspends on groceries by 20–40% — not from buying luxuries, but from <strong>small, invisible waste that adds up every week.</strong> Here are 9 habits that genuinely cut bills, with the actual savings math.</p>
+${hr()}
+<h2>1. Shop With a Meal Plan (Saves 15–25%)</h2>
+<p>People without a meal plan buy <u>30% more food than they use</u>. Spend 10 minutes Sunday planning 5 dinners. Your grocery list writes itself. Estimated savings: $50–$80/month (₹2,000–₹4,000).</p>
+${hr()}
+<h2>2. Buy Whole Ingredients, Not Pre-Cut</h2>
+<p>Pre-cut vegetables cost 40–60% more. A whole cabbage vs shredded cabbage. Block cheese vs shredded. <strong>5 minutes of knife work saves ₹200–₹500 per shop.</strong></p>
+${hr()}
+<h2>3. Freeze Before It Goes Bad</h2>
+${img("kitchen", "freeze food save money")}
+<p>Bread, meat, bananas, herbs, cooked rice — all freeze perfectly. The average household throws out <u>30% of perishables</u>. Freezing before the expiry date eliminates most of this waste.</p>
+${hr()}
+<h2>4. Buy Staples in Bulk (Selectively)</h2>
+<p>Lentils, rice, oats, canned goods, oil — bulk buying saves 20–30%. Rule: only bulk-buy what has a long shelf life AND you definitely consume regularly. Never bulk-buy perishables you might not finish.</p>
+${hr()}
+<h2>5. Generic / Store Brand for 80% of Items</h2>
+<p>For salt, sugar, flour, canned tomatoes, pasta, oil — store brands are often made in the same factories as name brands. <u>Switching saves 25–40% on those items</u> with zero quality difference.</p>
+${hr()}
+<h2>6. Shop the Perimeter First</h2>
+<p>Fresh produce, dairy, and protein are on the outside edges of any supermarket. The center aisles are processed food. Fill your cart with perimeter items first — <strong>you'll naturally spend less on packaged foods.</strong></p>
+${hr()}
+<h2>7. Check Unit Price, Not Package Price</h2>
+<p>The bigger pack isn't always cheaper per unit. Always check the price per 100g or per unit on the shelf label. <u>This reveals "value" sizes that are actually more expensive.</u></p>
+${hr()}
+<h2>8. Use Cashback Apps</h2>
+<p>US: Ibotta, Fetch Rewards — easy ₹500–₹2,000/month in cashback. India: PhonePe, Paytm, Amazon Pay offer grocery cashback of 5–15% regularly on partnered stores.</p>
+${hr()}
+<h2>9. Eat Before You Shop</h2>
+<p>Proven in multiple studies: shopping hungry increases spend by <u>17–25%</u>. This one habit costs nothing to implement and saves real money every trip.</p>
+${cta("kitchen")}
+`,
+
+  home_budget_makeover: () => `
+${img("living", "budget home makeover under 500 dollars")}
+<p>You don't need a renovation budget or an interior designer. <strong>The right $500 / ₹10,000 spent in the right places can make a home feel completely different.</strong> Here's exactly where to put it.</p>
+${hr()}
+<h2>The High-Impact, Low-Cost Hierarchy</h2>
+<p>Before spending anything: <u>declutter first</u>. Removing unnecessary items makes any space look 30% bigger and cleaner. Free. Non-negotiable first step.</p>
+${hr()}
+<h2>Lighting: Biggest Bang for Buck ($50–$150 / ₹2,000–₹5,000)</h2>
+<p>Lighting changes the entire mood of a room — and most homes have terrible lighting. Fixes:</p>
+<ul>
+<li>Replace overhead fluorescent with <strong>warm LED bulbs (2700–3000K)</strong> — ₹100–₹300 per bulb</li>
+<li>Add a floor lamp or table lamp for layered lighting — ₹800–₹3,000</li>
+<li><u>Fairy lights behind the TV or bed headboard</u> — ₹300–₹600, instant aesthetic upgrade</li>
+</ul>
+${hr()}
+<h2>Bedroom (₹2,000–₹4,000 / $50–$100)</h2>
+${img("family", "bedroom upgrade budget ideas")}
+<ul>
+<li><strong>New bedsheet set</strong> — cotton 400 thread count. The single biggest comfort upgrade. ₹800–₹2,500</li>
+<li><u>Throw pillows (2–3):</u> Changes the whole look. ₹300–₹800 each at Amazon/IKEA</li>
+<li><strong>Bedside table (DIY or thrift):</strong> A small table or stool transforms the space. ₹500–₹1,500</li>
+</ul>
+${hr()}
+<h2>Living Room (₹2,000–₹4,000 / $50–$120)</h2>
+<ul>
+<li><strong>Area rug:</strong> Defines the space, adds warmth. The most transformative single purchase. ₹1,500–₹5,000</li>
+<li><u>Plants (2–3 real or quality faux):</u> Immediate life added. Snake plant and pothos survive anything. ₹300–₹800</li>
+<li><strong>Gallery wall with printed photos:</strong> Print 5–10 photos at Snapfish/local shop. Frame at thrift stores. Total: ₹500–₹1,500</li>
+</ul>
+${hr()}
+<h2>Kitchen (₹1,000–₹2,000 / $30–$60)</h2>
+<ul>
+<li>New dish towels and a matching sponge holder — tiny detail, big visual difference</li>
+<li><u>Organize under the sink</u> with tension rods and small bins — ₹300–₹600</li>
+<li>Label containers for dry goods — ₹200–₹500 for a uniform look</li>
+</ul>
+${cta("living")}
+`,
+
   celeb_net_worth: () => `
 ${img("celebrity", "celebrity net worth 2026")}
 <p>Some of the biggest names in entertainment have seen their fortunes explode in 2026 — while others have quietly lost everything. <strong>Here's the raw breakdown of who's winning and who's falling apart financially.</strong> And more importantly, what the rest of us can actually learn from it.</p>
