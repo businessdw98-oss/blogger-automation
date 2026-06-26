@@ -1,0 +1,5 @@
+.env
+performance.json
+node_modules/
+publish.log
+*.log
