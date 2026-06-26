@@ -1,75 +1,118 @@
+/**
+ * 기발행 글 썸네일 중복 교체
+ * node fix_images.js
+ */
 const https = require("https");
-const { loadEnv, getValidToken } = require("./auth");
+const { getValidToken, loadEnv } = require("./auth");
+const { listPosts, updatePost } = require("./blogger");
+const { POOL } = require("./images");
 
-function apiRequest(method, path, body, token) {
+function apiGet(postId, token) {
   return new Promise((resolve, reject) => {
     const env = loadEnv();
-    const options = {
+    https.get({
       hostname: "www.googleapis.com",
-      path: `/blogger/v3${path}`,
-      method,
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
-      }
-    };
-    const req = https.request(options, res => {
+      path: `/blogger/v3/blogs/${env.BLOG_ID}/posts/${postId}`,
+      headers: { Authorization: `Bearer ${token}` }
+    }, res => {
       let raw = "";
       res.on("data", d => (raw += d));
-      res.on("end", () => {
-        try {
-          const parsed = JSON.parse(raw);
-          if (res.statusCode >= 400) reject(Object.assign(new Error(parsed.error?.message || raw), { status: res.statusCode }));
-          else resolve(parsed);
-        } catch { reject(new Error(raw)); }
-      });
-    });
-    req.on("error", reject);
-    if (body) req.write(JSON.stringify(body));
-    req.end();
+      res.on("end", () => { try { resolve(JSON.parse(raw)); } catch (e) { reject(e); } });
+    }).on("error", reject);
   });
 }
 
-// Pexels 직접 CDN URL (리다이렉트 없음)
-const IMG = {
-  ai:        "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  money:     "https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  laptop:    "https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800",
-  consulting:"https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
-  youtube:   "https://images.pexels.com/photos/1024248/pexels-photo-1024248.jpeg?auto=compress&cs=tinysrgb&w=800",
-  writing:   "https://images.pexels.com/photos/261662/pexels-photo-261662.jpeg?auto=compress&cs=tinysrgb&w=800",
-  chatbot:   "https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=800",
-};
+function pickCategory(title, labels) {
+  const t = (title + " " + (labels || []).join(" ")).toLowerCase();
+  if (/mixer|grinder|kitchen|airfryer|air fryer|appliance/.test(t)) return "kitchen";
+  if (/home|electricity|energy|bedroom|decor|living/.test(t)) return "home";
+  if (/aadhaar|epf|snap|welfare|benefit|scheme|centrelink|universal credit|social security|wic|food assistance/.test(t)) return "benefits";
+  if (/celebrity|divorce|bollywood|actor|actress|singer/.test(t)) return "celebrity";
+  if (/cricket|ipl|athlete|sports|fantasy/.test(t)) return "sports";
+  if (/india|indian|rupee|ias|salary india/.test(t)) return "india";
+  if (/laptop|earbuds|smartphone|gadget/.test(t)) return "laptop";
+  if (/food|restaurant|recipe|chai/.test(t)) return "food";
+  if (/travel|flight|hotel|trip/.test(t)) return "travel";
+  if (/\bai\b|artificial intelligence|chatgpt/.test(t)) return "ai";
+  if (/side hustle|freelance|passive income|earn|income|hustle/.test(t)) return "income";
+  return "finance";
+}
+
+const usedInSession = new Set();
+function pickUniqueImg(category) {
+  const pool = POOL[category] || POOL.finance;
+  let available = pool.filter(url => !usedInSession.has(url));
+  if (available.length === 0) {
+    pool.forEach(url => usedInSession.delete(url));
+    available = [...pool];
+  }
+  const url = available[Math.floor(Math.random() * available.length)];
+  usedInSession.add(url);
+  return url;
+}
+
+function replaceHeroImage(content, newUrl) {
+  return content.replace(
+    /(<img[^>]+src=["'])([^"'?]+)(\??[^"']*)(["'][^>]*>)/,
+    (match, pre, oldSrc, query, post) => `${pre}${newUrl}?auto=compress&cs=tinysrgb&w=1200${post}`
+  );
+}
 
 async function main() {
-  const env = loadEnv();
   const token = await getValidToken();
+  const data = await listPosts(token, 50);
+  const posts = data.items || [];
 
-  // 최근 글 목록에서 대상 포스트 찾기
-  const list = await apiRequest("GET", `/blogs/${env.BLOG_ID}/posts?maxResults=5&status=live`, null, token);
-  const post = list.items?.[0];
-  if (!post) { console.error("글을 찾을 수 없음"); return; }
+  console.log("총 " + posts.length + "개 글 이미지 점검 중...\n");
 
-  console.log(`수정 대상: ${post.title}`);
+  const postDetails = [];
+  for (const p of posts) {
+    const full = await apiGet(p.id, token);
+    const firstImgMatch = (full.content || "").match(/<img[^>]+src=["']([^"'?]+)/);
+    const heroUrl = firstImgMatch ? firstImgMatch[1] : null;
+    postDetails.push({ ...p, content: full.content, heroUrl });
+    await new Promise(r => setTimeout(r, 300));
+  }
 
-  // 이미지 교체
-  let content = post.content
-    .replace(/https:\/\/source\.unsplash\.com\/1200x500[^"']*/g, IMG.ai)
-    .replace(/https:\/\/source\.unsplash\.com\/800x400\/\?consulting[^"']*/g, IMG.consulting)
-    .replace(/https:\/\/source\.unsplash\.com\/800x400\/\?youtube[^"']*/g, IMG.youtube)
-    .replace(/https:\/\/source\.unsplash\.com\/800x400\/\?writing[^"']*/g, IMG.writing)
-    .replace(/https:\/\/source\.unsplash\.com\/800x400\/\?chatbot[^"']*/g, IMG.chatbot)
-    .replace(/https:\/\/source\.unsplash\.com[^"']*/g, IMG.money);
+  // 중복 URL 찾기
+  const urlCount = {};
+  for (const p of postDetails) {
+    if (p.heroUrl) urlCount[p.heroUrl] = (urlCount[p.heroUrl] || 0) + 1;
+  }
+  const duplicateUrls = new Set(
+    Object.entries(urlCount).filter(([, c]) => c > 1).map(([url]) => url)
+  );
 
-  await apiRequest("PUT", `/blogs/${env.BLOG_ID}/posts/${post.id}`, {
-    kind: "blogger#post",
-    id: post.id,
-    title: post.title,
-    content
-  }, token);
+  console.log("중복 썸네일 URL: " + duplicateUrls.size + "개\n");
 
-  console.log("✅ 이미지 수정 완료!");
-  console.log(`   URL: ${post.url}`);
+  // 중복 없는 글 이미지는 선점 등록
+  for (const p of postDetails) {
+    if (p.heroUrl && !duplicateUrls.has(p.heroUrl)) usedInSession.add(p.heroUrl);
+  }
+
+  // 중복 글 교체
+  let fixed = 0;
+  for (const p of postDetails) {
+    if (!p.heroUrl || !duplicateUrls.has(p.heroUrl)) continue;
+
+    const category = pickCategory(p.title, p.labels);
+    const newUrl = pickUniqueImg(category);
+    const newContent = replaceHeroImage(p.content, newUrl);
+
+    try {
+      await updatePost({ id: p.id, title: p.title, content: newContent, labels: p.labels || [], token });
+      const newId = newUrl.match(/photos\/(\d+)\//)?.[1] || "?";
+      const oldId = p.heroUrl.match(/photos\/(\d+)\//)?.[1] || "?";
+      console.log("OK [" + category + "] " + p.title.slice(0, 55));
+      console.log("   " + oldId + " -> " + newId);
+      fixed++;
+    } catch (e) {
+      console.error("FAIL: " + p.title.slice(0, 50) + " -- " + e.message);
+    }
+    await new Promise(r => setTimeout(r, 1500));
+  }
+
+  console.log("\n완료: " + fixed + "개 썸네일 교체됨");
 }
 
 main().catch(console.error);

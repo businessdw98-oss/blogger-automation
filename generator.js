@@ -1,26 +1,15 @@
 // Claude API 없이 로컬에서 고품질 글 생성
-// 템플릿 + 동적 데이터 조합
+// 템플릿 + 동적 데이터 조합 — images.js 풀로 중복 방지
 
-const PEXELS = {
-  money:    "https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  income:   "https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  laptop:   "https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  ai:       "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  benefits: "https://images.pexels.com/photos/6963944/pexels-photo-6963944.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  finance:  "https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  india:    "https://images.pexels.com/photos/1007426/pexels-photo-1007426.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  family:   "https://images.pexels.com/photos/1128318/pexels-photo-1128318.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  celebrity:"https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  sports:   "https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  food:     "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  travel:   "https://images.pexels.com/photos/1285625/pexels-photo-1285625.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  cricket:  "https://images.pexels.com/photos/3718495/pexels-photo-3718495.jpeg?auto=compress&cs=tinysrgb&w=1200",
-};
+const { getImg } = require("./images");
 
+// generator 내부에서 쓰는 img() — images.js 풀에서 중복 없이 랜덤 선택
 function img(type, alt, width = "100%") {
-  const src = PEXELS[type] || PEXELS.finance;
-  return `<img src="${src}" alt="${alt}" style="width:${width};border-radius:8px;margin:16px 0" loading="lazy"/>`;
+  return getImg(type, alt, width, "1200");
 }
+
+// 하위 호환용 (외부에서 import할 때 대비)
+const PEXELS = {};
 
 function hr() { return `<hr style="border:none;border-top:1px solid #e0e0e0;margin:28px 0"/>`; }
 
