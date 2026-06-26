@@ -63,7 +63,14 @@ function parseRssTitles(xml) {
       const title = titleMatch[1].replace(/<[^>]+>/g, "").replace(/&amp;/g, "&")
         .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').trim();
       if (title && title.length > 5 && !title.toLowerCase().includes("google news")) {
-        items.push(title);
+        // 기사 링크 추출 (이미지 소스로 활용)
+        const linkMatch = block.match(/<link>(.*?)<\/link>/s) || block.match(/<guid[^>]*>(.*?)<\/guid>/s);
+        const sourceMatch = block.match(/<source[^>]*>(.*?)<\/source>/s);
+        items.push({
+          title,
+          articleUrl: linkMatch ? linkMatch[1].trim() : null,
+          sourceName: sourceMatch ? sourceMatch[1].trim() : null
+        });
       }
     }
   }
@@ -76,9 +83,11 @@ async function fetchGoogleNews(query, geo = "US", lang = "en") {
   const url = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=${lang}&gl=${geo}&ceid=${ceid}`;
   try {
     const xml = await fetch(url);
-    return parseRssTitles(xml).slice(0, 5).map(title => ({
+    return parseRssTitles(xml).slice(0, 5).map(item => ({
       source: `gnews_${geo}`,
-      title,
+      title: item.title,
+      articleUrl: item.articleUrl,
+      sourceName: item.sourceName,
       geo,
       score: 50
     }));

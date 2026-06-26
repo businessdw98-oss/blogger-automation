@@ -56,9 +56,20 @@ async function publishPost({ title, content, labels = [], token }) {
   }, token);
 }
 
-async function listPosts(maxResults = 10) {
+async function listPosts(token, maxResults = 10) {
   const env = loadEnv();
-  return apiRequest("GET", `/blogs/${env.BLOG_ID}/posts?maxResults=${maxResults}&status=live`);
+  return apiRequest("GET", `/blogs/${env.BLOG_ID}/posts?maxResults=${maxResults}&status=live`, null, token);
 }
 
-module.exports = { getBlogInfo, publishPost, listPosts };
+async function updatePost({ id, title, content, labels, token }) {
+  const env = loadEnv();
+  return apiRequest("PUT", `/blogs/${env.BLOG_ID}/posts/${id}`, {
+    kind: "blogger#post",
+    id,
+    title,
+    content,
+    labels
+  }, token);
+}
+
+module.exports = { getBlogInfo, publishPost, listPosts, updatePost };

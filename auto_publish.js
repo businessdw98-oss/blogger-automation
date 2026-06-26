@@ -10,7 +10,8 @@ const { publishPost } = require("./blogger");
 const { getValidToken } = require("./auth");
 const { pickTopic } = require("./topics");
 const { generateContent, img, PEXELS } = require("./generator");
-const { getTrendingTopics, trendToTitle, buildTrendContent } = require("./trend_fetcher");
+const { getTrendingTopics } = require("./trend_fetcher");
+const { buildTrendPost } = require("./content_engine");
 const { logPost, getUsedTopicIds, printSummary } = require("./tracker");
 const sb = require("./supabase");
 
@@ -33,14 +34,14 @@ const args = process.argv.slice(2);
 if (args.includes("--status")) { printSummary(); process.exit(0); }
 
 const COUNT = parseInt(args.find(a => /^\d+$/.test(a))) || 1;
-const DELAY_MS = 6000;
+// 10분 간격 (AI 계정 의심 방지)
+const DELAY_MS = 10 * 60 * 1000;
 
 // 트렌드 글 비율: 15개 중 8개는 트렌드, 7개는 템플릿
 const TREND_RATIO = 0.55;
 
-async function publishTrendPost(token, trend, templateIdx) {
-  const title = trendToTitle(trend, templateIdx);
-  const content = buildTrendContent(trend, img, null, null);
+async function publishTrendPost(token, trend) {
+  const { title, content } = buildTrendPost(trend);
   const geo = trend.geo || "US";
   const category = detectCategory(trend.title);
   const labels = [category, "Trending", "2026", geo === "IN" ? "India" : "US", trend.source?.includes("youtube") ? "YouTube Trends" : "News"];
@@ -119,7 +120,7 @@ async function main() {
       let post;
       if (item.type === "trend") {
         console.log(`📰 [트렌드/${item.data.geo}] ${item.data.title}`);
-        post = await publishTrendPost(token, item.data, item.idx);
+        post = await publishTrendPost(token, item.data);
       } else {
         const usedIds = getUsedTopicIds(30);
         const topic = pickTopic(usedIds);
